@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Food - Feane</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .header {
+        background: #222831;
+        padding: 15px 0;
+        color: white;
+      }
+
+      .container {
+        width: 1200px;
+        margin: auto;
+      }
+
+      .header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .header__brand {
+        font-size: 28px;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .nav-list a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .right {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .icon__link svg {
+        width: 22px;
+        height: 22px;
+        fill: white;
+        cursor: pointer;
+      }
+
+      .icon__link:hover svg {
+        fill: #ffbe33;
+      }
+
+      .btn__primary {
+        background: #ffbe33;
+        color: black;
+        padding: 8px 16px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      /* SEARCH */
+
+      .search-section {
+        padding: 60px 0;
+        background: #f5f5f5;
+        min-height: 100vh;
+      }
+
+      .search-box {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .search-box input {
+        width: 450px;
+        padding: 14px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+
+      .product-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+      }
+
+      .product {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .product img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        color: #ff6600;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .btn {
+        background: #ffbe33;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+
+      .no-result {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 30px;
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a class="header__brand" href="index.html">Feane</a>
+
+        <ul class="nav-list">
+          <li><a href="../index.html">HOME</a></li>
+          <li><a href="menu.html">MENU</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="book.html">BOOK TABLE</a></li>
+        </ul>
+
+        <div class="right">
+          <a class="icon__link" href="login.html">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"
+              />
+            </svg>
+          </a>
+
+          <a class="icon__link" href="cart.html">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44A2 2 0 0010 19h10v-2H10.42"
+              />
+            </svg>
+          </a>
+
+          <a class="icon__link" href="search.html">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.5 6.5 0 1014 15.5l.27.28v.79l5 5 1.5-1.5-5-5z"
+              />
+            </svg>
+          </a>
+
+          <a class="btn__primary" href="menu.html">Order Online</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="search-section">
+      <div class="container">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search food..." />
+        </div>
+
+        <div class="product-list" id="productList">
+          <div class="product">
+            <img src="../assets/Images/f1.png" />
+            <h3>Delicious Pizza</h3>
+            <p class="price">$20</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+
+          <div class="product">
+            <img src="../assets/Images/f2.png" />
+            <h3>Delicious Burger</h3>
+            <p class="price">$15</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+
+          <div class="product">
+            <img src="../assets/Images/f3.png" />
+            <h3>Cheese Pizza</h3>
+            <p class="price">$17</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+
+          <div class="product">
+            <img src="../assets/Images/f4.png" />
+            <h3>Delicious Pasta</h3>
+            <p class="price">$18</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+
+          <div class="product">
+            <img src="../assets/Images/f5.png" />
+            <h3>French Fries</h3>
+            <p class="price">$10</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+
+          <div class="product">
+            <img src="../assets/Images/f7.png" />
+            <h3>Tasty Burger</h3>
+            <p class="price">$12</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="no-result" id="noResult">No product found</div>
+      </div>
+    </section>
+
+    <script>
+      const searchInput = document.getElementById("searchInput");
+      const products = document.querySelectorAll(".product");
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("keyup", function () {
+        let value = searchInput.value.toLowerCase();
+        let visible = 0;
+
+        products.forEach((product) => {
+          let name = product.querySelector("h3").textContent.toLowerCase();
+
+          if (name.includes(value)) {
+            product.style.display = "block";
+            visible++;
+          } else {
+            product.style.display = "none";
+          }
+        });
+
+        if (visible === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* ADD TO CART */
+
+      const buttons = document.querySelectorAll(".btn");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const product = btn.closest(".product");
+
+          const name = product.querySelector("h3").innerText;
+          const price = product
+            .querySelector(".price")
+            .innerText.replace("$", "");
+          const img = product.querySelector("img").src;
+
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+          let existing = cart.find((item) => item.name === name);
+
+          if (existing) {
+            existing.qty++;
+          } else {
+            cart.push({
+              name: name,
+              price: price,
+              img: img,
+              qty: 1,
+            });
+          }
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+
+          alert("Added to cart");
+        });
+      });
+    </script>
+  </body>
+</html>

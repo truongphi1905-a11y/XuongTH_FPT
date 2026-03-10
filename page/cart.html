@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - Feane</title>
+
+    <style>
+      body {
+        font-family: Arial;
+        margin: 0;
+      }
+
+      .container {
+        width: 1200px;
+        margin: auto;
+      }
+
+      .header {
+        background: #222831;
+        padding: 15px 0;
+        color: white;
+      }
+
+      .header__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .nav-list a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .cart-section {
+        padding: 60px 0;
+      }
+
+      .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .cart-table th,
+      .cart-table td {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .cart-product {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .cart-product img {
+        width: 70px;
+      }
+
+      .qty-btn {
+        background: #ffbe33;
+        border: none;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+
+      .remove-btn {
+        background: red;
+        border: none;
+        color: white;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+
+      .cart-summary {
+        margin-top: 30px;
+        background: #f5f5f5;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a href="index.html">Feane</a>
+
+        <ul class="nav-list">
+          <li><a href="../index.html">HOME</a></li>
+          <li><a href="menu.html">MENU</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="book.html">BOOK TABLE</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="cart-section container">
+      <h2>Your Cart</h2>
+
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody id="cartBody"></tbody>
+      </table>
+
+      <div class="cart-summary">
+        <p>Subtotal: <span id="subtotal">$0</span></p>
+        <p>Shipping: $5</p>
+        <h3>Total: <span id="total">$0</span></h3>
+      </div>
+    </section>
+
+    <script>
+      function loadCart() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        let cartBody = document.getElementById("cartBody");
+
+        cartBody.innerHTML = "";
+
+        let subtotal = 0;
+
+        cart.forEach((item, index) => {
+          let total = item.price * item.qty;
+
+          subtotal += total;
+
+          cartBody.innerHTML += `
+
+<tr>
+
+<td>
+<div class="cart-product">
+<img src="${item.img}">
+<span>${item.name}</span>
+</div>
+</td>
+
+<td>$${item.price}</td>
+
+<td>
+<button onclick="changeQty(${index},-1)" class="qty-btn">-</button>
+${item.qty}
+<button onclick="changeQty(${index},1)" class="qty-btn">+</button>
+</td>
+
+<td>$${total}</td>
+
+<td>
+<button onclick="removeItem(${index})" class="remove-btn">X</button>
+</td>
+
+</tr>
+
+`;
+        });
+
+        document.getElementById("subtotal").innerText = "$" + subtotal;
+        document.getElementById("total").innerText = "$" + (subtotal + 5);
+      }
+
+      function changeQty(index, change) {
+        let cart = JSON.parse(localStorage.getItem("cart"));
+
+        cart[index].qty += change;
+
+        if (cart[index].qty <= 0) {
+          cart.splice(index, 1);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        loadCart();
+      }
+
+      function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem("cart"));
+
+        cart.splice(index, 1);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        loadCart();
+      }
+
+      loadCart();
+    </script>
+  </body>
+</html>
